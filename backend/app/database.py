@@ -12,6 +12,10 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 # Create Base class for models
 Base = declarative_base()
 
+def create_tables():
+    """Create all database tables"""
+    Base.metadata.create_all(bind=engine)
+
 # Dependency to get database session
 def get_db():
     db = SessionLocal()
