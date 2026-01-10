@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from app.database import create_tables
 from app.routers import auth, projects, tasks
 
@@ -6,6 +7,15 @@ app = FastAPI(
     title="Multi-Tenant Task Management API",
     description="A SaaS platform for task management with multi-tenancy support",
     version="1.0.0"
+)
+
+# Configure CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Create database tables on startup
